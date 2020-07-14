@@ -1,0 +1,100 @@
+name: Unit Tests
+
+on:
+  push:
+    branches:
+      - master
+      - development
+  pull_request:
+    branches:
+      - master
+      - development
+  release:
+    branches:
+      - master
+      
+env:
+  PROJECT: ${{ github.event.repository.name }}.xcodeproj
+  SCHEME: ${{ github.event.repository.name }}
+  TEST_SCHEME: ${{ github.event.repository.name }}Tests
+
+
+jobs:
+  xcodebuild_iPadOS_build_and_test:
+    name: iPadOS Unit Tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+          os: [macOS-latest]
+          destination: ['platform=iOS Simulator,OS=13.5,name=iPad Pro (12.9-inch) (4th generation)']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check environment variables
+        run: |
+         echo PROJECT: $PROJECT
+         echo SCHEME: $SCHEME
+         echo TEST_SCHEME: $TEST_SCHEME
+      - name: Check xcodebuild version
+        run: |
+          xcodebuild -version
+          type -a xcodebuild
+      - name: Check xcode-select version
+        run: |
+          xcode-select -version
+          type -a xcode-select
+      - name: Check availabble devices
+        run: |
+          instruments -s devices
+      - name: Clean xcodeproject
+        run: |
+          xcodebuild clean
+      - name: Build xcodeproject
+        run: |
+          xcodebuild build -project $PROJECT -scheme $SCHEME CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+      - name: Test xcodeproject
+        run: |
+          xcodebuild test -project $PROJECT -scheme $TEST_SCHEME -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        env:
+         destination: ${{ matrix.destination }}
+         
+  xcodebuild_iOS_build_and_test:
+    name: iOS Unit Tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+          os: [macOS-latest]
+          destination: ['platform=iOS Simulator,OS=13.5,name=iPhone 11 Pro Max']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check environment variables
+        run: |
+         echo PROJECT: $PROJECT
+         echo SCHEME: $SCHEME
+         echo TEST_SCHEME: $TEST_SCHEME
+      - name: Check xcodebuild version
+        run: |
+          xcodebuild -version
+          type -a xcodebuild
+      - name: Check xcode-select version
+        run: |
+          xcode-select -version
+          type -a xcode-select
+      - name: Check availabble devices
+        run: |
+          instruments -s devices
+      - name: Clean xcodeproject
+        run: |
+          xcodebuild clean
+      - name: Build xcodeproject
+        run: |
+          xcodebuild build -project $PROJECT -scheme $SCHEME CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+      - name: Test xcodeproject
+        run: |
+          xcodebuild test -project $PROJECT -scheme $TEST_SCHEME -destination "$DESTINATION" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        env:
+          DESTINATION: ${{ matrix.destination }}
+      - name: Update code coverage
+        run: |
+          bash <(curl -s https://codecov.io/bash) -J $SCHEME

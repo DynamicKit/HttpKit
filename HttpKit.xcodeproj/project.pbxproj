@@ -112,8 +112,9 @@
 		DDE531DA24BB8F9D0064898C /* HttpKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = HttpKit.podspec; sourceTree = "<group>"; };
 		DDE531DB24BB8F9D0064898C /* CODEOWNERS */ = {isa = PBXFileReference; lastKnownFileType = text; path = CODEOWNERS; sourceTree = "<group>"; };
 		DDE531DC24BB8F9D0064898C /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
-		DDE531DD24BB8FD70064898C /* website.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = website.yml; path = .github/workflows/website.yml; sourceTree = "<group>"; };
 		DDE531E124BB91CB0064898C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		DDE8ED0624BDBFEC00D3374E /* test.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = test.yml; sourceTree = "<group>"; };
+		DDE8ED0724BDBFEC00D3374E /* website.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = website.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,7 +318,7 @@
 		DDE531D724BB8F7C0064898C /* Workflows */ = {
 			isa = PBXGroup;
 			children = (
-				DDE531DD24BB8FD70064898C /* website.yml */,
+				DDE8ED0524BDBFEC00D3374E /* workflows */,
 			);
 			name = Workflows;
 			sourceTree = "<group>";
@@ -328,6 +329,16 @@
 				DDE531E124BB91CB0064898C /* Alamofire.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DDE8ED0524BDBFEC00D3374E /* workflows */ = {
+			isa = PBXGroup;
+			children = (
+				DDE8ED0624BDBFEC00D3374E /* test.yml */,
+				DDE8ED0724BDBFEC00D3374E /* website.yml */,
+			);
+			name = workflows;
+			path = .github/workflows;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
