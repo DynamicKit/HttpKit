@@ -37,7 +37,9 @@ jobs:
          echo TEST_SCHEME: $TEST_SCHEME
       - name: Check brew version
         run: |
+          carthage version
           brew -v
+          type -a brew
       - name: Check xcodebuild version
         run: |
           xcodebuild -version
@@ -55,6 +57,10 @@ jobs:
       - name: Install Carthage
         run: |
           brew outdated carthage || brew upgrade carthage
+      - name: Check carthage version
+        run: |
+          carthage version
+          type -a carthage
       - name: Install dependencies
         run: |
           carthage bootstrap
@@ -85,6 +91,9 @@ jobs:
          echo PROJECT: $PROJECT
          echo SCHEME: $SCHEME
          echo TEST_SCHEME: $TEST_SCHEME
+      - name: Check brew version
+        run: |
+          brew -v
       - name: Check xcodebuild version
         run: |
           xcodebuild -version
@@ -96,6 +105,19 @@ jobs:
       - name: Check availabble devices
         run: |
           instruments -s devices
+      - name: Update brew
+        run: |
+          brew update
+      - name: Install Carthage
+        run: |
+          brew outdated carthage || brew upgrade carthage
+      - name: Check carthage version
+        run: |
+          carthage version
+          type -a carthage
+      - name: Install dependencies
+        run: |
+          carthage bootstrap
       - name: Clean xcodeproject
         run: |
           xcodebuild clean
