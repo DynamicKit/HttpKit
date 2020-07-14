@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Car factory",
+        "cars": [
+            {
+                "model": "BMW",
+                "isConvertible": true,
+                "price": 1000
+            },
+            {
+                "model": "Benz",
+                "isConvertible": false,
+                "price": 83710
+            }
+        ]
+    },
+    {
+        "name": "Farm factory",
+        "cars": [
+            {
+                "model": "Zamiad",
+                "isConvertible": false,
+                "price": 1000000
+            }
+        ]
+    }
+]

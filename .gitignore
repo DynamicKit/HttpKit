@@ -1,0 +1,26 @@
+# Default macos files
+.DS_Store
+
+# Jekyll produced 
+.jekyll-cache
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xcuserstate
+
+# documentation related stuff
+build
+public
+sourcedocs
+
+# not needed ci configurations
+
+.gitlab-ci.yml
+
+# Carthage
+#
+
+Carthage/Build

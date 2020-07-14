@@ -1,0 +1,90 @@
+name: website
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  release:
+    branches:
+      - master
+      
+env:
+  PROJECT: ${{ github.event.repository.name }}.xcodeproj
+  SCHEME: ${{ github.event.repository.name }}
+  AUTHOR: Mohammadreza Koohkan
+  AUTHOR_URL: https://mohamadreza.codes/
+  THEME: apple
+  BUILD_DIR: public
+
+jobs:
+  publish:
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+          os: [macOS-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check environment variables
+        run: |
+         echo PROJECT: $PROJECT
+         echo SCHEME: $SCHEME
+         echo AUTHOR: $AUTHOR
+         echo AUTHOR_URL: $AUTHOR_URL
+         echo THEME: $THEME
+         echo BUILD_DIR: $BUILD_DIR
+      - name: Check gem version
+        run: |
+          gem -v
+          type -a gem
+      - name: Check bundle version
+        run: |
+          bundle -v
+          type -a bundle
+      - name: Check xcodebuild version
+        run: |
+          xcodebuild -version
+          type -a xcodebuild
+      - name: Check xcode-select version
+        run: |
+          xcode-select -version
+          type -a xcode-select
+      - name: Check xcodebuild comptability
+        run: |
+          xcodebuild clean
+          xcodebuild build -project $PROJECT -scheme $SCHEME CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+      - name: Install jazzy
+        run: |
+          gem install jazzy
+      - name: Check jazzy version
+        run: |
+          jazzy -version
+          type -a jazzy
+      - name: Where am i
+        run: |
+          pwd
+          ls
+      - name: Generate docs using jazzy
+        run: |
+          jazzy --build-tool-arguments CODE_SIGN_IDENTITY=,CODE_SIGNING_REQUIRED=NO,CODE_SIGNING_ALLOWED=NO \
+             --clean \
+             --author $AUTHOR \
+             --author_url $AUTHOR_URL \
+             --output $BUILD_DIR \
+             --module $SCHEME \
+             --theme $THEME
+          ls
+      - name: Check jazzy documentations folder
+        run: |
+          pwd && cd $BUILD_DIR && pwd && ls && cd ..
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
