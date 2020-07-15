@@ -26,10 +26,10 @@ public struct HTTPLog: CustomStringConvertible {
     private (set) var line: String? = nil
     private (set) var function: String? = nil
     private (set) var date: Date? = nil
-
+    
     public init<T>(request: HTTPRequest,
-                response: DataResponse<T, AFError>,
-                resultType: T.Type) {
+                   response: DataResponse<T, AFError>,
+                   resultType: T.Type) {
         
         let endpointScheme = request.endpoint.resolve
         let domainScheme = endpointScheme.domain.resolve
@@ -121,15 +121,15 @@ public struct HTTPLog: CustomStringConvertible {
     }
     
     public mutating func print(file filePath: String = #file,
-                      line: UInt = #line,
-                      function: String = #function) {
+                               line: UInt = #line,
+                               function: String = #function) {
         let file = (filePath.components(separatedBy: "/").last ?? "")
         self.file = file
         self.line = "\(line)"
         self.function = function
         self.date = Date()
         let start = "\n@HTTPLog: \(self.date!) \(file):\(line):\(function) \n"
-//        self.write()
+        //        self.write()
         Swift.print(start + self.description)
     }
     
@@ -156,4 +156,3 @@ public struct HTTPLog: CustomStringConvertible {
     }
     
 }
-
