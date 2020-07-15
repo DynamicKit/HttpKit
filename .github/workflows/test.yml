@@ -75,4 +75,6 @@ jobs:
           DESTINATION: ${{ matrix.destination }}
       - name: Update code coverage
         run: |
-          bash <(curl -s https://codecov.io/bash) -J $SCHEME
+          bash <(curl -s $CODE_COVERAGE -J $SCHEME
+        env:
+          CODE_COVERAGE: https://codecov.io/bash)
