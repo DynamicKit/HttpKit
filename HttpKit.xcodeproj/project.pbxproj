@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -47,7 +47,7 @@
 		DDE531D124BB8E6D0064898C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE531C824BB8E5D0064898C /* Endpoint.swift */; };
 		DDE531D424BB8E840064898C /* HTTPManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE531D224BB8E840064898C /* HTTPManagerTests.swift */; };
 		DDE531D524BB8E840064898C /* HTTPSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE531D324BB8E840064898C /* HTTPSessionTests.swift */; };
-		DDE531E224BB91CB0064898C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE531E124BB91CB0064898C /* Alamofire.framework */; };
+		DDE531E224BB91CB0064898C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE531E124BB91CB0064898C /* Alamofire.framework */; platformFilter = ios; };
 		DDE531E724BB92D10064898C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE531E124BB91CB0064898C /* Alamofire.framework */; };
 /* End PBXBuildFile section */
 
