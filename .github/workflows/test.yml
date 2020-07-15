@@ -78,3 +78,4 @@ jobs:
           bash <(curl -s $CODE_COVERAGE -J $SCHEME
         env:
           CODE_COVERAGE: https://codecov.io/bash)
+
