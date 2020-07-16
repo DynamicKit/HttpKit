@@ -49,7 +49,7 @@ public class HTTPRequest: CustomStringConvertible {
     
     /// Be careful this method create new instace of DataRequest and deinitialize previous one in method chaining procedure
     @discardableResult
-    func body(_ httpBody: Alamofire.Parameters?) -> HTTPRequest {
+    public func body(_ httpBody: Alamofire.Parameters?) -> HTTPRequest {
         self.body = httpBody
         return self.createRequest()
     }
