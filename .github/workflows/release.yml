@@ -57,7 +57,8 @@ jobs:
             -sdk iphonesimulator \
             -destination "${destination}" \
             CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO
+            CODE_SIGNING_REQUIRED=NO \
+            SKIP_INSTALL=NO
         env:
          destination: ${{ matrix.simulator }}
       - name: Archive for generic iOS devices
